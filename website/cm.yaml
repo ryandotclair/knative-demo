@@ -1,0 +1,79 @@
+apiVersion: v1
+data:
+  _example: |
+    ################################
+    #                              #
+    #    EXAMPLE CONFIGURATION     #
+    #                              #
+    ################################
+
+    # This block is not actually functional configuration,
+    # but serves to illustrate the available configuration
+    # options and document them in a way that is accessible
+    # to users that `kubectl edit` this config map.
+    #
+    # These sample configuration options may be copied out of
+    # this example block and unindented to be in the data block
+    # to actually change the configuration.
+
+    # Specifies whether requests reaching the Kourier gateway
+    # in the context of services should be logged. Readiness
+    # probes etc. must be configured via the bootstrap config.
+    enable-service-access-logging: "true"
+
+    # Specifies whether to use proxy-protocol in order to safely
+    # transport connection information such as a client's address
+    # across multiple layers of TCP proxies.
+    # NOTE THAT THIS IS AN EXPERIMENTAL / ALPHA FEATURE
+    enable-proxy-protocol: "false"
+
+    # The server certificates to serve the internal TLS traffic for Kourier Gateway.
+    # It is specified by the secret name in controller namespace, which has
+    # the "tls.crt" and "tls.key" data field.
+    # Use an empty value to disable the feature (default).
+    #
+    # NOTE: This flag is in an alpha state and is mostly here to enable internal testing
+    #       for now. Use with caution.
+    cluster-cert-secret: ""
+
+    # Specifies the amount of time that Kourier waits for the incoming requests.
+    # The default, 0s, imposes no timeout at all.
+    stream-idle-timeout: "0s"
+
+    # Specifies whether to use CryptoMB private key provider in order to
+    # acclerate the TLS handshake.
+    # NOTE THAT THIS IS AN EXPERIMENTAL / ALPHA FEATURE.
+    enable-cryptomb: "false"
+
+    # Configures the number of additional ingress proxy hops from the
+    # right side of the x-forwarded-for HTTP header to trust.
+    trusted-hops-count: "0"
+
+    # Configures the connection manager to use the real remote address
+    # of the client connection when determining internal versus external origin and manipulating various headers.
+    use-remote-address: "false"
+
+    # Specifies the cipher suites for TLS external listener.
+    # Use ',' separated values like "ECDHE-ECDSA-AES128-GCM-SHA256,ECDHE-ECDSA-CHACHA20-POLY1305"
+    # The default uses the default cipher suites of the envoy version.
+    cipher-suites: ""
+
+    # Disable the Envoy server header injection in the response when response has no such header.
+    disable-envoy-server-header: "false"
+  trusted-hops-count: "2"
+  enable-proxy-protocol: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"_example":"################################\n#                              #\n#    EXAMPLE CONFIGURATION     #\n#                              #\n################################\n\n# This block is not actually functional configuration,\n# but serves to illustrate the available configuration\n# options and document them in a way that is accessible\n# to users that `kubectl edit` this config map.\n#\n# These sample configuration options may be copied out of\n# this example block and unindented to be in the data block\n# to actually change the configuration.\n\n# Specifies whether requests reaching the Kourier gateway\n# in the context of services should be logged. Readiness\n# probes etc. must be configured via the bootstrap config.\nenable-service-access-logging: \"true\"\n\n# Specifies whether to use proxy-protocol in order to safely\n# transport connection information such as a client's address\n# across multiple layers of TCP proxies.\n# NOTE THAT THIS IS AN EXPERIMENTAL / ALPHA FEATURE\nenable-proxy-protocol: \"false\"\n\n# The server certificates to serve the internal TLS traffic for Kourier Gateway.\n# It is specified by the secret name in controller namespace, which has\n# the \"tls.crt\" and \"tls.key\" data field.\n# Use an empty value to disable the feature (default).\n#\n# NOTE: This flag is in an alpha state and is mostly here to enable internal testing\n#       for now. Use with caution.\ncluster-cert-secret: \"\"\n\n# Specifies the amount of time that Kourier waits for the incoming requests.\n# The default, 0s, imposes no timeout at all.\nstream-idle-timeout: \"0s\"\n\n# Specifies whether to use CryptoMB private key provider in order to\n# acclerate the TLS handshake.\n# NOTE THAT THIS IS AN EXPERIMENTAL / ALPHA FEATURE.\nenable-cryptomb: \"false\"\n\n# Configures the number of additional ingress proxy hops from the\n# right side of the x-forwarded-for HTTP header to trust.\ntrusted-hops-count: \"0\"\n\n# Configures the connection manager to use the real remote address\n# of the client connection when determining internal versus external origin and manipulating various headers.\nuse-remote-address: \"false\"\n\n# Specifies the cipher suites for TLS external listener.\n# Use ',' separated values like \"ECDHE-ECDSA-AES128-GCM-SHA256,ECDHE-ECDSA-CHACHA20-POLY1305\"\n# The default uses the default cipher suites of the envoy version.\ncipher-suites: \"\"\n\n# Disable the Envoy server header injection in the response when response has no such header.\ndisable-envoy-server-header: \"false\"\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"net-kourier","app.kubernetes.io/name":"knative-serving","app.kubernetes.io/version":"1.18.0","networking.knative.dev/ingress-provider":"kourier"},"name":"config-kourier","namespace":"knative-serving"}}
+  creationTimestamp: "2025-06-18T20:41:01Z"
+  labels:
+    app.kubernetes.io/component: net-kourier
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.18.0
+    networking.knative.dev/ingress-provider: kourier
+  name: config-kourier
+  namespace: knative-serving
+  resourceVersion: "401203"
+  uid: 6c59e244-8eb5-4831-b116-4259fbaf692a
